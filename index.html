@@ -328,38 +328,61 @@ section{position:relative;}
 }
 
 /* ===== REVIEW ===== */
-.review-section{position:relative; overflow:hidden;}
-.review-bg-text{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  font-family:'Fraunces',serif; font-size:clamp(200px,28vw,380px); font-weight:700;
-  color:var(--line-light); line-height:1; pointer-events:none; user-select:none; white-space:nowrap;
+.review-section{position:relative; background:var(--cream); overflow:hidden;}
+.review-top{
+  display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(36px,5vw,72px);
+  align-items:center; padding-bottom:clamp(48px,6vw,72px);
+  border-bottom:1px solid var(--line);
 }
-.review-badge{
-  position:relative; z-index:1; display:flex; flex-direction:column; align-items:center;
-  text-align:center; gap:10px; max-width:520px; margin:0 auto clamp(48px,6vw,72px);
+.review-stat{
+  background:#fff; border-radius:8px; padding:clamp(32px,3.5vw,44px);
+  box-shadow:var(--shadow); text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
 }
-.rb-stars{display:flex; gap:5px;}
-.rb-stars svg{width:18px; height:18px; color:var(--copper);}
-.rb-score{font-family:'Fraunces',serif; font-size:44px; font-weight:600; color:var(--yew); line-height:1;}
-.rb-label{font-size:13.5px; color:var(--sage); font-weight:500; line-height:1.5; max-width:340px;}
-.review-grid{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1080px; margin:0 auto;}
+.rb-score{font-family:'Fraunces',serif; font-size:clamp(48px,5vw,60px); font-weight:600; color:var(--yew); line-height:1;}
+.rb-outof{font-size:0.4em; color:var(--sage); font-weight:500;}
+.rb-stars{display:flex; gap:4px; margin:2px 0 6px;}
+.rb-stars svg{width:16px; height:16px; color:var(--copper);}
+.rb-label{
+  font-family:'Fraunces',serif; font-style:italic; font-size:19px;
+  color:var(--yew); font-weight:500;
+}
+.rb-sub{font-size:13px; color:var(--sage); font-weight:500; line-height:1.5; max-width:260px;}
+.review-featured{
+  position:relative; padding-left:clamp(28px,3vw,40px);
+  border-left:3px solid var(--copper);
+}
+.review-featured{
+  font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+  font-size:clamp(21px,2.4vw,28px); line-height:1.55; color:var(--yew); margin:0;
+}
+.review-featured footer{
+  margin-top:22px; font-family:'Work Sans',sans-serif; font-style:normal;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--sage); font-weight:600;
+}
+.review-featured footer span{text-transform:none; letter-spacing:0; font-weight:500; opacity:.8;}
+@media(max-width:880px){
+  .review-top{grid-template-columns:1fr; gap:32px;}
+  .review-stat{max-width:340px; margin:0 auto;}
+}
+
+.review-strip{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  padding-top:clamp(40px,5vw,60px);
+}
 .review-card{
-  background:#fff; border:1px solid var(--line); border-radius:5px;
-  padding:clamp(26px,2.5vw,34px); position:relative;
-  transition:transform .35s ease, box-shadow .35s ease;
+  background:#fff; border:1px solid var(--line); border-radius:6px;
+  padding:clamp(24px,2.4vw,30px); position:relative;
+  transition:transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s ease, border-color .35s ease;
 }
-.review-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+.review-card:hover{transform:translateY(-5px); box-shadow:var(--shadow); border-color:transparent;}
+.rc-stars{color:var(--copper); font-size:12px; letter-spacing:2px; margin-bottom:14px;}
 .review-card blockquote{
   font-family:'Fraunces',serif; font-style:italic; font-weight:400;
-  font-size:16.5px; line-height:1.62; color:var(--yew);
-  margin:0 0 20px; padding:0; max-width:none;
+  font-size:15.5px; line-height:1.6; color:var(--yew); margin:0 0 18px; padding:0;
 }
-.review-card blockquote::before{
-  content:'\201C'; display:block; font-size:40px; color:var(--copper); opacity:.35;
-  font-style:normal; line-height:1; margin-bottom:6px; position:static;
-}
-.review-attr{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sage); font-weight:600;}
-@media(max-width:880px){.review-grid{grid-template-columns:1fr; gap:16px;}}
+.review-attr{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--sage); font-weight:600;}
+@media(max-width:880px){.review-strip{grid-template-columns:1fr; gap:14px;}}
 
 /* ===== EXPLORE ===== */
 .explore-head{max-width:560px; margin-bottom:clamp(36px,5vw,56px);}
@@ -446,9 +469,31 @@ form.contact-form{
 
 /* ===== FOOTER ===== */
 footer.site-footer{background:#fff; border-top:1px solid var(--line);}
+.footer-cta-band{
+  margin-top:clamp(40px,6vw,64px);
+  background:var(--yew-darkest); border-radius:6px;
+  padding:clamp(32px,4vw,48px) clamp(28px,4vw,52px);
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.fcb-text .eyebrow{display:block; margin-bottom:8px;}
+.fcb-text h3{color:#fff; font-size:clamp(20px,2.4vw,28px); font-weight:500; line-height:1.25; max-width:420px;}
+.fcb-btn{
+  display:inline-flex; align-items:center; gap:12px; flex-shrink:0;
+  padding:16px 30px; background:var(--copper); color:#fff; border-radius:2px;
+  font-size:13px; font-weight:600; letter-spacing:.04em;
+  transition:background .3s ease, transform .2s ease, gap .3s ease;
+}
+.fcb-btn:hover{background:#fff; color:var(--yew-deep); gap:16px; transform:translateY(-2px);}
+.fcb-btn svg{width:18px; height:18px; flex-shrink:0;}
+.fcb-arrow{transition:transform .3s ease;}
+.fcb-btn:hover .fcb-arrow{transform:translateX(2px);}
+@media(max-width:620px){
+  .footer-cta-band{flex-direction:column; align-items:flex-start; text-align:left;}
+  .fcb-btn{width:100%; justify-content:center;}
+}
 .footer-upper{
-  padding:clamp(48px,6vw,72px) 0 clamp(36px,5vw,52px);
-  display:grid; grid-template-columns:1.4fr 0.8fr 0.8fr 1fr; gap:clamp(24px,4vw,60px);
+  padding:clamp(40px,5vw,56px) 0 clamp(36px,5vw,52px);
+  display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:clamp(24px,4vw,60px);
   border-bottom:1px solid var(--line);
 }
 .footer-brand .brand{display:inline-block; margin-bottom:16px;}
@@ -459,7 +504,6 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
 }
 .footer-col a, .footer-col span.static{display:block; font-size:14px; color:#555b4e; padding:3px 0; margin-bottom:7px; transition:color .25s ease;}
 .footer-col a:hover{color:var(--copper);}
-.footer-cta-col p{font-size:13.5px; line-height:1.65; color:#6f756a; margin-bottom:18px; max-width:240px;}
 .foot-bottom{
   display:flex; justify-content:space-between; align-items:center;
   padding:22px 0; flex-wrap:wrap; gap:12px;
@@ -468,7 +512,7 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
 .foot-bottom .fr{font-size:11.5px; color:#9a9f92; display:flex; gap:24px; align-items:center; flex-wrap:wrap;}
 .foot-bottom .fr a{color:#9a9f92; transition:color .25s ease;}
 .foot-bottom .fr a:hover{color:var(--copper);}
-@media(max-width:880px){.footer-upper{grid-template-columns:1fr 1fr; gap:32px 20px;}}
+@media(max-width:700px){.footer-upper{grid-template-columns:1fr 1fr; gap:32px 20px;}}
 @media(max-width:520px){.footer-upper{grid-template-columns:1fr;}}
 
 /* ===== REVEALS ===== */
@@ -481,10 +525,67 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
   .reveal{transition:none!important; opacity:1!important; transform:none!important;}
   .hero-bg img{animation:none!important;}
   .scroll-cue .mouse::after{animation:none!important;}
+}/* ===== ACCESS GATE ===== */
+#gate{
+  position:fixed; inset:0; z-index:999;
+  background:var(--yew-darkest);
+  display:flex; align-items:center; justify-content:center; padding:24px;
 }
+#gate::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(107,122,94,0.22), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(166,118,79,0.22), transparent 45%);
+}
+.gate-card{
+  position:relative; background:#fff; border-radius:8px;
+  padding:48px 42px 40px; max-width:400px; width:100%; text-align:center;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,0.45);
+}
+.gate-card img{height:52px; margin:0 auto 22px;}
+.gate-card .eyebrow{display:block; margin-bottom:10px; color:var(--copper-deep);}
+.gate-card h1{font-size:1.5rem; margin-bottom:.3em; font-weight:500;}
+.gate-card p{font-size:.95rem; color:#5a6055; margin-top:0;}
+#gate input{
+  width:100%; margin-top:20px; padding:15px 16px; border-radius:5px;
+  border:1.5px solid #ddd5c4; font-size:1.35rem; text-align:center;
+  letter-spacing:.4em; font-family:'Work Sans',sans-serif; font-weight:600;
+  color:var(--yew); background:var(--cream);
+}
+#gate input:focus{outline:none; border-color:var(--copper); box-shadow:0 0 0 3px rgba(166,118,79,0.18);}
+#gate button{
+  margin-top:16px; width:100%; padding:14px 0; border:none; border-radius:5px;
+  background:var(--yew); color:#fff; font-family:'Work Sans',sans-serif;
+  font-weight:600; font-size:.98rem; cursor:pointer; transition:background .2s ease;
+}
+#gate button:hover{background:var(--copper-deep);}
+#gate .hint{margin-top:16px; font-size:.78rem; color:#9a9f92;}
+#gate .error{color:#a14b3a; font-size:.85rem; min-height:1.2em; margin-top:10px; font-weight:600;}
+@media(max-width:380px){
+  .gate-card{padding:36px 26px 30px;}
+  #gate input{font-size:1.5rem; letter-spacing:.3em;}
+}
+body.unlocked #gate{display:none;}
+#site{display:none;}
+body.unlocked #site{display:block;}
 </style>
 </head>
 <body>
+
+<div id="gate">
+  <div class="gate-card">
+    <img alt="Harrogate Hidden Stay" src="https://raw.githubusercontent.com/9s4pr6gvvk-bot/hhs/refs/heads/main/HHS%20Logo.png">
+    <span class="eyebrow">Draft preview</span>
+    <h1>Passcode protected</h1>
+    <p>Enter the 6‑digit access code to review this draft homepage.</p>
+    <input id="gate-input" type="text" inputmode="numeric" maxlength="6" placeholder="• • • • • •" autocomplete="off">
+    <button id="gate-submit">Unlock preview</button>
+    <div class="error" id="gate-error"></div>
+    <div class="hint">Code shared with Jane only.</div>
+  </div>
+</div>
+
+<div id="site">
 
 <!-- ===== HEADER ===== -->
 <header class="site" id="siteHeader">
@@ -663,31 +764,37 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
 
 <!-- ===== REVIEW ===== -->
 <section class="review-section pad" id="reviews">
-  <div class="review-bg-text">★</div>
   <div class="wrap">
-    <div class="review-badge reveal">
-      <div class="rb-stars">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+    <div class="review-top reveal">
+      <div class="review-stat">
+        <span class="rb-score">4.92<span class="rb-outof">/5</span></span>
+        <div class="rb-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+        </div>
+        <span class="rb-label">Guest favourite</span>
+        <span class="rb-sub">One of the most loved homes on Airbnb, based on 13 reviews</span>
       </div>
-      <span class="rb-score">4.92</span>
-      <span class="rb-label">Guest favourite — one of the most loved homes on Airbnb, based on 13 reviews</span>
+      <blockquote class="review-featured">A beautiful, tastefully furnished home and thoughtful extra touches made our stay in Harrogate exceptional in every way. We look forward to returning.<footer>Nicola <span>· 10 years on Airbnb</span></footer></blockquote>
     </div>
-    <div class="review-grid">
+    <div class="review-strip">
       <div class="review-card reveal">
-        <blockquote>A beautiful, tastefully furnished home and thoughtful extra touches made our stay in Harrogate exceptional in every way. We look forward to returning.</blockquote>
-        <div class="review-attr">Nicola · 10 years on Airbnb</div>
-      </div>
-      <div class="review-card reveal reveal-delay-1">
-        <blockquote>Faultless, informative and friendly communication from booking to leaving. Home from home surroundings — everything we could have wished for and more. Great host.</blockquote>
+        <div class="rc-stars">★★★★★</div>
+        <blockquote>Faultless, informative and friendly communication from booking to leaving. Home from home surroundings — everything we could have wished for and more.</blockquote>
         <div class="review-attr">Alison · 2 years on Airbnb</div>
       </div>
-      <div class="review-card reveal reveal-delay-2">
+      <div class="review-card reveal reveal-delay-1">
+        <div class="rc-stars">★★★★★</div>
         <blockquote>Lovely place, perfect quiet location within very easy walking distance of the town centre, and a really thoughtful host. Would definitely stay again.</blockquote>
         <div class="review-attr">Lorraine · June 2026</div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="rc-stars">★★★★★</div>
+        <blockquote>Beautiful apartment in a very peaceful area. Access to the garden was lovely.</blockquote>
+        <div class="review-attr">Hilary · May 2026</div>
       </div>
     </div>
   </div>
@@ -772,6 +879,17 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="wrap">
+    <div class="footer-cta-band reveal">
+      <div class="fcb-text">
+        <span class="eyebrow" style="color:var(--copper);">Ready when you are</span>
+        <h3>Book your stay at Harrogate Hidden Stay.</h3>
+      </div>
+      <a href="http://airbnb.co.uk/h/harrogatehiddenstay" target="_blank" rel="noopener" class="fcb-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2C7 6 4 10 4 14a8 8 0 0016 0c0-4-3-8-8-12z"/></svg>
+        <span>Book on Airbnb</span>
+        <svg class="fcb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
     <div class="footer-upper">
       <div class="footer-col footer-brand">
         <a href="#" class="brand" style="margin-bottom:16px;"><img src="https://raw.githubusercontent.com/9s4pr6gvvk-bot/hhs/refs/heads/main/HHS%20Logo.png" alt="Harrogate Hidden Stay" style="height:46px; width:auto; filter:none;"></a>
@@ -791,11 +909,6 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
         <span class="static">The Duchy, Harrogate</span>
         <a href="https://www.instagram.com/harrogatehiddenstay" target="_blank" rel="noopener">Instagram</a>
       </div>
-      <div class="footer-col footer-cta-col">
-        <h4>Ready to book?</h4>
-        <p>View availability and book securely through Airbnb, or get in touch directly.</p>
-        <a href="http://airbnb.co.uk/h/harrogatehiddenstay" target="_blank" rel="noopener" class="btn btn-dark" style="margin-top:4px;">Book on Airbnb</a>
-      </div>
     </div>
     <div class="foot-bottom">
       <div class="fl">© 2026 Harrogate Hidden Stay · <a href="https://www.myrunswickbay.co.uk" target="_blank" rel="noopener" style="color:inherit;">Also visit My Runswick Bay</a></div>
@@ -808,38 +921,59 @@ footer.site-footer{background:#fff; border-top:1px solid var(--line);}
   </div>
 </footer>
 
+</div>
+
 <script>
-(function(){
-  // ---- Header scroll state ----
-  var header = document.getElementById('siteHeader');
-  var lastY = 0;
-  function checkHeader(){
-    header.classList.toggle('scrolled', window.scrollY > 80);
-    lastY = window.scrollY;
+  // ---- Access gate ----
+  var ACCESS_CODE = "384920";
+  var gateInput = document.getElementById('gate-input');
+  var gateBtn = document.getElementById('gate-submit');
+  var gateErr = document.getElementById('gate-error');
+
+  function tryUnlock(){
+    if(gateInput.value.trim() === ACCESS_CODE){
+      document.body.classList.add('unlocked');
+      window.scrollTo(0,0);
+      initSite();
+    } else {
+      gateErr.textContent = "That code doesn't match. Please try again.";
+      gateInput.value = '';
+      gateInput.focus();
+    }
   }
-  window.addEventListener('scroll', checkHeader, {passive:true});
-  checkHeader();
+  gateBtn.addEventListener('click', tryUnlock);
+  gateInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ tryUnlock(); } });
+  gateInput.addEventListener('input', function(){ gateErr.textContent=''; });
 
-  // ---- Mobile nav ----
-  var navToggle = document.getElementById('navToggle');
-  var navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', function(){
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      navToggle.classList.remove('active');
-      navLinks.classList.remove('open');
+  function initSite(){
+    // ---- Header scroll state ----
+    var header = document.getElementById('siteHeader');
+    function checkHeader(){
+      header.classList.toggle('scrolled', window.scrollY > 80);
+    }
+    window.addEventListener('scroll', checkHeader, {passive:true});
+    checkHeader();
+
+    // ---- Mobile nav ----
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function(){
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
     });
-  });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
 
-  // ---- Reveal on scroll ----
-  var revealObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); });
-  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
-})();
+    // ---- Reveal on scroll ----
+    var revealObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+  }
 </script>
 
 </body>
