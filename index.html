@@ -37,6 +37,8 @@ body{
 h1,h2,h3,h4{font-family:'Fraunces', serif; color:var(--yew); letter-spacing:.005em;}
 /* Global overflow safety: let long words and hyphenated strings wrap rather than push the layout wide */
 h1,h2,h3,h4,p,span,a,blockquote,li,div{overflow-wrap:break-word; word-wrap:break-word;}
+/* Prevent CSS grid/flex tracks from refusing to shrink below their content's intrinsic size (min-width:auto blowout) */
+.about-layout > *, .review-top > *, .contact-grid > *, .footer-upper > *, .amenity-grid > *, .explore-cards > *, .review-strip > *, .trust-inner > *{min-width:0;}
 a{color:inherit; text-decoration:none;}
 img{display:block; max-width:100%;}
 svg{max-width:100%;}
@@ -239,7 +241,8 @@ section{position:relative; overflow-x:clip;}
 
 /* ===== ABOUT ===== */
 .about-layout{display:grid; grid-template-columns:1fr 1.1fr; gap:clamp(40px,6vw,90px); align-items:center;}
-.about-photos{position:relative; height:560px; max-width:100%;}
+.about-layout > *{min-width:0;}
+.about-photos{position:relative; height:560px; max-width:100%; min-width:0;}
 .about-photo-main{
   position:absolute; top:0; left:0; width:72%; height:78%;
   border-radius:4px; overflow:hidden; box-shadow:var(--shadow-lg);
